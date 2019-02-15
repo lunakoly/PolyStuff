@@ -4,7 +4,7 @@ import kotlin.math.max
  * The Killer of BigInteger
  *
  * Internal 'digits' are stored as numbers
- * of base 10^ELEMENT_SIZE
+ * of base 10^ELEMENT_SIZE and are called 'elements'
  */
 class HugeInteger private constructor(private val elements: ArrayList<Int>) {
     companion object {
@@ -179,7 +179,7 @@ class HugeInteger private constructor(private val elements: ArrayList<Int>) {
         // -------
         // TTTTTTT
 
-        // the resulting length is a sum of lengths as it can
+        // the resulting maximum length is a sum of lengths as it can
         // be seen here
 
         for (it in 0 until this.elements.size + other.elements.size)
@@ -197,7 +197,7 @@ class HugeInteger private constructor(private val elements: ArrayList<Int>) {
             var j = 0
 
             while (j < other.elements.size || rest != 0) {
-                // bin numbers can be really big
+                // big numbers can be really big
                 // and so my last times() test will fail if I
                 // don't do toLong()
                 val value = elements[i + j] + this.elements[i].toLong() * other.elements.getOrElse(j) { 0 } + rest
@@ -222,7 +222,7 @@ class HugeInteger private constructor(private val elements: ArrayList<Int>) {
 
     operator fun div(other: HugeInteger): HugeInteger {
         if (other > this)
-            return HugeInteger.zero()
+            return zero()
 
         val elements = arrayListOf<Int>()
 
