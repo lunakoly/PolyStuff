@@ -180,6 +180,8 @@ object CStyleLexer {
     /**
      * Reads character that is not a part
      * of any common operator
+     * Actually this thing is language-specific.
+     * Maybe I should put it somewhere else
      */
     private fun readNonOperator(out: Fetcher): Boolean {
         if (

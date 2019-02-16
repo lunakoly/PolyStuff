@@ -2,11 +2,11 @@ import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 
-internal class JSONTest {
+internal class RegexJsonParserTest {
 
     @Test
     fun parse() {
-        val result = JSON.parse("""
+        val result = RegexJsonParser.parse("""
             {
                 "a": [
                     true,"kek", {
