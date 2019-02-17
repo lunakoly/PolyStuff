@@ -75,9 +75,16 @@ fun pack() {
     header["files"] = files
 
     for (source in SOURCES) {
+        val file = File(source)
+
+        if (!file.exists()) {
+            println("Error > File `$source` doesn't exist")
+            return
+        }
+
         val item = Json.Dictionary()
         item["name"] = Json.Item(source, true)
-        item["size"] = Json.Item(getFileSize(File(source)).toString(), true)
+        item["size"] = Json.Item(getFileSize(file).toString(), true)
         files.add(item)
     }
 
@@ -92,6 +99,12 @@ fun pack() {
 
 fun unpack() {
     val input = File(PARAMETERS["unpack"])
+
+    if (!input.exists()) {
+        println("Error > File `$input` doesn't exist")
+        return
+    }
+
     val reader = input.bufferedReader()
     val header = StreamJsonParser.parse(reader)
 
